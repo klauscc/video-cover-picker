@@ -5,7 +5,6 @@ set (CMAKE_CXX_STANDARD 11)
 find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
-#include_directories("/home/klaus/.conda/envs/klaus_all/include")
 message(STATUS "Opencv include dir:" ${OpenCV_INCLUDE_DIRS} )
 message(STATUS "Opencv libs dir:" ${OpenCV_LIBS} )
 
