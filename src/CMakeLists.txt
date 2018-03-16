@@ -4,7 +4,9 @@ set (CMAKE_CXX_STANDARD 11)
 
 find_package(OpenCV REQUIRED)
 
-include_directories(${OpenCV_INCLUDE_DIRS})
+#add_subdirectory(third_party/dlib)
+
+include_directories(${OpenCV_INCLUDE_DIRS} ./third_party/dlib)
 message(STATUS "Opencv include dir:" ${OpenCV_INCLUDE_DIRS} )
 message(STATUS "Opencv libs dir:" ${OpenCV_LIBS} )
 

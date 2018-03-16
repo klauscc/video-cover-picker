@@ -1,0 +1,6 @@
+[submodule "third_party/dlib"]
+	path = src/third_party/dlib
+	url = https://github.com/davisking/dlib.git
+[submodule "src/third_party/dlib"]
+	path = src/third_party/dlib
+	url = https://github.com/davisking/dlib.git
