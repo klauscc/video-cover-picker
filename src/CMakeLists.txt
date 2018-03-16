@@ -12,7 +12,7 @@ message(STATUS "Opencv include dir:" ${OpenCV_INCLUDE_DIRS} )
 message(STATUS "Opencv libs dir:" ${OpenCV_LIBS} )
 
 add_library(iqa_algorithm SHARED ittivsmodel.cpp nriqa.cpp faceModel.cpp)
-target_link_libraries(iqa_algorithm ${OpenCV_LIBS} dlib)
+target_link_libraries(iqa_algorithm ${OpenCV_LIBS})
  
 add_executable(demo_bak demo_bak20180301.cpp )
 target_link_libraries(demo_bak iqa_algorithm)
