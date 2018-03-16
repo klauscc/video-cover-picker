@@ -6,7 +6,7 @@ float faceModel::calculateFaceScore(const cv::Mat &image, cv::Mat &output,
   positionScore = 0;
   areaScore = 0;
   float finalScore;
-  // std::vector<cv::Rect> faces = detectFace(image);
+  // std::vector<cv::Rect> faces = detectFaceOpencv(image);
   std::vector<cv::Rect> faces = detectFaceDlib(image);
   int height = image.rows;
   int width = image.cols;
@@ -66,7 +66,7 @@ float faceModel::calculateFaceScore(const cv::Mat &image, cv::Mat &output,
   return finalScore;
 }
 
-std::vector<cv::Rect> faceModel::detectFace(const cv::Mat &image) {
+std::vector<cv::Rect> faceModel::detectFaceOpencv(const cv::Mat &image) {
   cv::Mat frame_gray;
   std::vector<cv::Rect> faces;
 

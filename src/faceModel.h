@@ -28,7 +28,7 @@ public:
   virtual ~faceModel();
 
 private:
-  std::vector<cv::Rect> detectFace(const cv::Mat &image);
+  std::vector<cv::Rect> detectFaceOpencv(const cv::Mat &image);
   std::vector<cv::Rect> detectFaceDlib(const cv::Mat &image);
 
   std::string faceCascadeName; /*!< Member description */
