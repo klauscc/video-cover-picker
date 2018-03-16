@@ -9,7 +9,7 @@
 
 int main(int argc, char** argv) {
 
-    std::string img_path = "../ori_imgs/2/7.jpg";
+    std::string img_path = "../dataset/ori_imgs/2/7.jpg";
     Mat input = imread(img_path);
     if( !input.data ) {
         printf(" No data! -- Exiting the program \n");

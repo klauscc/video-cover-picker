@@ -17,8 +17,8 @@
 
 int main(int argc, char **argv) {
 
-  std::string ori_img_dir = "../ori_imgs/";
-  std::string qa_img_dir = "../qa_imgs/";
+  std::string ori_img_dir = "../dataset/ori_imgs/";
+  std::string qa_img_dir = "../dataset/qa_imgs/";
   int stop_dir = 74;
   for (int i = 1; i <= stop_dir; i++) {
     std::stringstream ss_qa_dir;
