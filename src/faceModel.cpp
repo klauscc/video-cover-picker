@@ -6,7 +6,8 @@ float faceModel::calculateFaceScore(const cv::Mat &image, cv::Mat &output,
   positionScore = 0;
   areaScore = 0;
   float finalScore;
-  std::vector<cv::Rect> faces = detectFace(image);
+  // std::vector<cv::Rect> faces = detectFace(image);
+  std::vector<cv::Rect> faces = detectFaceDlib(image);
   int height = image.rows;
   int width = image.cols;
 
@@ -22,7 +23,7 @@ float faceModel::calculateFaceScore(const cv::Mat &image, cv::Mat &output,
   std::vector<faceBoundingBox> faceBoxes;
   faceBoxes.reserve(faces.size());
   for (int i = 0; i < (int)allFaceBoxes.size(); i++) {
-    if (allFaceBoxes[i].height > 0.15) {
+    if (allFaceBoxes[i].height > 0.14) {
       faceBoxes.push_back(allFaceBoxes[i]);
     }
   }
@@ -88,4 +89,19 @@ faceModel::faceModel(std::string face_cascade_name_) {
   }
 }
 
+std::vector<cv::Rect> faceModel::detectFaceDlib(const cv::Mat &image) {
+  dlib::cv_image<dlib::bgr_pixel> cimg(image);
+  std::vector<dlib::rectangle> dets = detector(cimg);
+  std::vector<cv::Rect> cv_dets;
+  cv_dets.reserve(dets.size());
+  for (int i = 0; i < (int)dets.size(); i++) {
+    int l_ = dets[i].left();
+    int t_ = dets[i].top();
+    int w_ = dets[i].right() - dets[i].left();
+    int h_ = dets[i].bottom() - dets[i].top();
+    cv::Rect rect(l_, t_, w_, h_);
+    cv_dets.push_back(rect);
+  }
+  return cv_dets;
+}
 faceModel::~faceModel() {}

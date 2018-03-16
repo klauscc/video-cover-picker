@@ -7,6 +7,10 @@
 #ifndef FACE_MODEL_H
 #define FACE_MODEL_H
 
+#include "dlib/image_processing.h"
+#include "dlib/image_processing/frontal_face_detector.h"
+#include "dlib/image_processing/render_face_detections.h"
+#include "dlib/opencv.h"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/objdetect/objdetect.hpp"
@@ -25,10 +29,11 @@ public:
 
 private:
   std::vector<cv::Rect> detectFace(const cv::Mat &image);
+  std::vector<cv::Rect> detectFaceDlib(const cv::Mat &image);
 
-protected:
   std::string faceCascadeName; /*!< Member description */
   cv::CascadeClassifier faceCascade;
+  dlib::frontal_face_detector detector = dlib::get_frontal_face_detector();
 
   struct faceBoundingBox {
     /* normalized face bounding box. each value is between [0,1]*/

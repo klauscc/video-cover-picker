@@ -78,7 +78,7 @@ get_python_inc(),
 '-I',
 '/home/klaus/.conda/envs/klaus_all/include',
 '-I',
-'third_party/dlib'
+'./src/third_party/dlib'
 ]
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,

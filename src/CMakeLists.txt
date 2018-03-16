@@ -4,6 +4,7 @@ set (CMAKE_CXX_STANDARD 11)
 
 find_package(OpenCV REQUIRED)
 
+set (CMAKE_CXX_FLAGS "-fPIC")
 add_subdirectory(third_party/dlib)
 
 include_directories(${OpenCV_INCLUDE_DIRS} ./third_party/dlib)
