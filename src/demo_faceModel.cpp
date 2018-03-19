@@ -1,5 +1,3 @@
-#include "ittivsmodel.h"
-#include "nriqa.h"
 #include <iostream>
 #include <math.h>
 #include <opencv2/highgui/highgui.hpp>
@@ -13,7 +11,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "faceModel.h"
+#include "algorithms/ittivsmodel.h"
+#include "algorithms/nriqa.h"
+#include "algorithms/faceModel.h"
 
 int main(int argc, char **argv) {
 

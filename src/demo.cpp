@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <iostream>
 #include <stdio.h>
-#include "ittivsmodel.h"
-#include "nriqa.h"
+#include "algorithms/ittivsmodel.h"
+#include "algorithms/nriqa.h"
 
 #include <sys/stat.h>
 #include <sys/types.h>

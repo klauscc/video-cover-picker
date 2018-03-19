@@ -76,7 +76,7 @@ get_python_inc(),
 '-isystem',
 './benchmarks/benchmark/include',
 '-I',
-'/home/klaus/.conda/envs/klaus_all/include',
+'/home/klaus/.conda/envs/iqa/include',
 '-I',
 './src/third_party/dlib'
 ]
