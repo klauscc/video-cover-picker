@@ -78,7 +78,11 @@ get_python_inc(),
 '-I',
 '/home/klaus/.conda/envs/iqa/include',
 '-I',
-'./src/third_party/dlib'
+'/home/klaus/.conda/envs/iqa/include/opencv',
+'-I',
+'./src/third_party/dlib',
+'-I',
+'./src/third_party/'
 ]
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,

@@ -1,4 +1,7 @@
 build
-dataset
 *.swp
 *.swa
+ori_imgs
+qa_imgs
+*.jpg
+*.zip

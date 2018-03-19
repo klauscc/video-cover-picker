@@ -5,6 +5,10 @@ set (CMAKE_CXX_STANDARD 11)
 
 find_package(OpenCV REQUIRED)
 
+include_directories(${OpenCV_INCLUDE_DIRS} 
+    ./third_party/dlib
+    ./third_party/)
+
 add_subdirectory(algorithms)
 
 add_executable(demo_bak demo_bak20180301.cpp )

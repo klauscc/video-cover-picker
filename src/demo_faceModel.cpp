@@ -11,9 +11,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "algorithms/brisque.h"
+#include "algorithms/faceModel.h"
 #include "algorithms/ittivsmodel.h"
 #include "algorithms/nriqa.h"
-#include "algorithms/faceModel.h"
 
 int main(int argc, char **argv) {
 
@@ -57,6 +58,7 @@ int main(int argc, char **argv) {
     }
 
     faceModel facemodel;
+    brisque brisque;
     for (int j = 1; j <= 12; j++) {
       std::stringstream ss_img_path, ss_img_write;
       ss_img_path << ori_img_dir << i << "/" << j << ".jpg";
@@ -65,12 +67,20 @@ int main(int argc, char **argv) {
       Mat input = imread(ss_img_path.str());
       Mat output;
       float areaScore, posScore;
-      float score =
+      float faceScore =
           facemodel.calculateFaceScore(input, output, areaScore, posScore);
-      std::cout << ss_img_path.str() << ":" << score << std::endl;
+      float brisqueScore = brisque.computeScore(input);
+      brisqueScore = 1 - brisqueScore / 100;
+      float score = faceScore * 2 + brisqueScore;
+      if (brisqueScore < 0.3) {
+        score = 0;
+      }
+      std::cout << ss_img_path.str() << ".face_score:" << faceScore
+                << "brisqueScore:" << brisqueScore << std::endl;
       // std::cout << iqa[0] << std::endl;
       ss_img_write << (int)(1000 * score) << "_" << (int)(1000 * areaScore)
-                   << "_" << (int)(1000 * posScore) << "_";
+                   << "_" << (int)(1000 * posScore) << "_"
+                   << (int)(1000 * brisqueScore) << "_";
       ss_img_write << j << ".jpg";
       // std::cout << ss_img_write.str() << std::endl;
       imwrite(ss_img_write.str(), output);

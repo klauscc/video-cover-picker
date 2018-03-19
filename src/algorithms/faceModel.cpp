@@ -51,7 +51,7 @@ float faceModel::calculateFaceScore(const cv::Mat &image, cv::Mat &output,
   if (faceBoxes.size() == 1) {
     positionScore =
         1 - (std::abs(box_center.x - 0.5) + std::abs(box_center.y - 0.5)) / 2;
-  } else if (faceBoxes.size() > 2) {
+  } else if (faceBoxes.size() >= 2) {
     float min_varience =
         (std::abs(box_center.x - 0.5) + std::abs(box_center.y - 0.5)) / 2;
     min_varience = std::min<float>(
