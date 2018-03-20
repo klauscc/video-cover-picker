@@ -67,6 +67,7 @@ int main(int argc, char **argv) {
       Mat input = imread(ss_img_path.str());
       Mat output;
       float areaScore, posScore;
+      long t1 = cv::getTickCount(); 
       float faceScore =
           facemodel.calculateFaceScore(input, output, areaScore, posScore);
       float brisqueScore = brisque.computeScore(input);
@@ -75,8 +76,10 @@ int main(int argc, char **argv) {
       if (brisqueScore < 0.3) {
         score = 0;
       }
+      long t2 = cv::getTickCount(); 
+      double secs = (t2-t1) / cv::getTickFrequency(); 
       std::cout << ss_img_path.str() << ".face_score:" << faceScore
-                << "brisqueScore:" << brisqueScore << std::endl;
+                << "brisqueScore:" << brisqueScore << "...takes:" << secs << "s"<< std::endl;
       // std::cout << iqa[0] << std::endl;
       ss_img_write << (int)(1000 * score) << "_" << (int)(1000 * areaScore)
                    << "_" << (int)(1000 * posScore) << "_"

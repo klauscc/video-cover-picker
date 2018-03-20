@@ -20,8 +20,7 @@
 
 class faceModel {
 public:
-  faceModel(std::string face_cascade_name_ =
-                "../model/haarcascade_frontalface_default.xml");
+  faceModel(std::string face_cascade_name_ = "../model/haarcascade_frontalface_default.xml");
 
   float calculateFaceScore(const cv::Mat &image, cv::Mat &output,
                            float &areaScore, float &posScore);
@@ -31,9 +30,10 @@ private:
   std::vector<cv::Rect> detectFaceOpencv(const cv::Mat &image);
   std::vector<cv::Rect> detectFaceDlib(const cv::Mat &image);
 
-  std::string faceCascadeName; /*!< Member description */
-  cv::CascadeClassifier faceCascade;
   dlib::frontal_face_detector detector = dlib::get_frontal_face_detector();
+
+  std::string faceCascadeName;
+  cv::CascadeClassifier faceCascade;
 
   struct faceBoundingBox {
     /* normalized face bounding box. each value is between [0,1]*/

@@ -80,6 +80,7 @@ std::vector<cv::Rect> faceModel::detectFaceOpencv(const cv::Mat &image) {
   return faces;
 }
 
+
 faceModel::faceModel(std::string face_cascade_name_) {
   faceCascadeName = face_cascade_name_;
   int res = faceCascade.load(faceCascadeName);

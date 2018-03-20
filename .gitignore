@@ -5,3 +5,5 @@ ori_imgs
 qa_imgs
 *.jpg
 *.zip
+*.tar.gz
+dataset
