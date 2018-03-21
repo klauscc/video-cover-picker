@@ -19,6 +19,17 @@ inline void getFileNamesInDir(const std::string path,
   }
 }
 
+inline void getDirectoriesInDir(const std::string path,
+                              std::vector<std::string> &filenames) {
+  fs::path p(path);
+  for (auto i = fs::directory_iterator(p); i != fs::directory_iterator(); ++i) {
+    if (fs::is_directory(i->path())) {
+      filenames.push_back(i->path().filename().string());
+    } else {
+      continue;
+    }
+  }
+}
 inline void splitFileName(const std::string &fileName, std::string &base,
                           std::string &ext) {
   size_t dot_idx = fileName.find_last_of("/\\.");
