@@ -58,7 +58,7 @@ int main(int argc, char **argv) {
     }
 
     faceModel facemodel;
-    brisque brisque;
+    Brisque brisque;
     for (int j = 1; j <= 12; j++) {
       std::stringstream ss_img_path, ss_img_write;
       ss_img_path << ori_img_dir << i << "/" << j << ".jpg";

@@ -11,9 +11,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "utils/fileUtil.h"
 #include <boost/format.hpp>
 
+#include "algorithms/utils/fileUtil.h"
 #include "algorithms/brisque.h"
 #include "algorithms/faceModel.h"
 #include "algorithms/ittivsmodel.h"
@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
   }
 
   faceModel facemodel;
-  brisque brisque;
+  Brisque brisque;
 
   int numVideos = 14;
   for (int i = 1; i < numVideos; ++i) {

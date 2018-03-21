@@ -1,22 +1,24 @@
 #include "brisque.h"
 
-brisque::brisque(std::string allRangeFile, std::string allModel) {
-  if (readRangeFile(allRangeFile)) {
-    std::cerr << "unable to open allrange file" << std::endl;
-  }
-  if ((model = svm_load_model(allModel.c_str())) == 0) {
+int Brisque::loadSvmModel(std::string modelFilePath)
+{
+  if ((model = svm_load_model(modelFilePath.c_str())) == 0) {
     fprintf(stderr, "can't open model file allmodel\n");
     exit(1);
+    return 1;
   }
+  return 0;
 }
 
-float brisque::computeScore(cv::Mat image) {
+
+float Brisque::computeScore(cv::Mat image) {
   double qualityscore;
   int i;
   IplImage orig = image;
   std::vector<double> brisqueFeatures;
   ComputeBrisqueFeature(&orig, brisqueFeatures);
   // rescale the brisqueFeatures vector from -1 to 1
+  struct svm_node x[37];
   for (i = 0; i < 36; ++i) {
     float min = rescale_vector[i][0];
     float max = rescale_vector[i][1];
@@ -31,7 +33,7 @@ float brisque::computeScore(cv::Mat image) {
   return qualityscore;
 }
 
-int brisque::readRangeFile(std::string rangeFilePath) {
+int Brisque::readRangeFile(std::string rangeFilePath) {
 
   // check if file exists
   char buff[100];
@@ -51,7 +53,7 @@ int brisque::readRangeFile(std::string rangeFilePath) {
   return 0;
 }
 
-brisque::~brisque() {
+Brisque::~Brisque() {
   if (model != NULL) {
     svm_free_and_destroy_model(&model);
   }

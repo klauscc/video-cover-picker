@@ -7,19 +7,18 @@
 
 // rescaling based on training data i libsvm
 
-class brisque {
+class Brisque {
 public:
-  brisque(std::string allRangeFile = "../model/brisque/allrange", std::string allModel = "../model/brisque/allmodel");
+  Brisque() {}
   float computeScore(cv::Mat image);
-  virtual ~brisque();
+  virtual ~Brisque();
 
-private:
-  int readRangeFile(std::string rangeFilePath);
+  int readRangeFile(std::string rangeFilePath = "../model/brisque/allrange");
+  int loadSvmModel(std::string modelFilePath = "../model/brisque/allmodel"); 
 
 private:
   /* data */
   struct svm_model *model;
-  struct svm_node x[37];
   float rescale_vector[36][2];
 };
 
