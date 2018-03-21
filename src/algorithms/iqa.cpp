@@ -17,12 +17,14 @@ float iqa::computeScore(const std::string &imagePath) {
   }
   return score;
 }
-
-std::string iqa::getBestImages(std::string imageDir, float &bestScore,
-                               std::string &bestImageName) {
+int iqa::getBestImages(std::string imageDir, float &bestScore,
+                       std::string &bestImageName, std::string &bestImagePath) {
   std::vector<std::string> fileNames;
   getFileNamesInDir(imageDir, fileNames);
-  std::string bestImage = (fs::path(imageDir) / fs::path(fileNames[0])).c_str();
+  if (fileNames.size() == 0) {
+    return 1;
+  }
+  bestImagePath = (fs::path(imageDir) / fs::path(fileNames[0])).c_str();
   bestImageName = fileNames[0];
   bestScore = 0;
   for (size_t j = 0; j < fileNames.size(); ++j) {
@@ -31,11 +33,11 @@ std::string iqa::getBestImages(std::string imageDir, float &bestScore,
     float score = computeScore(oriImgPath);
     if (score > bestScore) {
       bestScore = score;
-      bestImage = oriImgPath;
+      bestImagePath = oriImgPath;
       bestImageName = fileNames[j];
     }
   }
-  return bestImage;
+  return 0;
 }
 
 iqa::iqa(std::string allRangeFile, std::string allModel) {
