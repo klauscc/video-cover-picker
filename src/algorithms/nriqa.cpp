@@ -135,9 +135,9 @@ vector<float> nriqa::nriqaQualityIndex(Mat img, Mat vsi) {
         }
     }*/
 
-    std::cout << "global mssim is: " << g_mssim << std::endl;
-    std::cout << "nrss is: " << nrss << std::endl;
-    std::cout << "Rp is: " << Rp << std::endl;
+    //std::cout << "global mssim is: " << g_mssim << std::endl;
+    //std::cout << "nrss is: " << nrss << std::endl;
+    //std::cout << "Rp is: " << Rp << std::endl;
     //std::cout << "Rh is: " << Rh << std::endl;
     //std::cout << "global entropy is: " << g_entropy << std::endl;
     //transpose(Rp_mat, Rp_mat);
@@ -167,7 +167,7 @@ vector<float> nriqa::nriqaQualityIndex(Mat img, Mat vsi) {
     qaIndex.push_back(g_mssim);
     qaIndex.push_back(Rp);
     //qaIndex.push_back(Rh);
-    //qaIndex.push_back(g_entropy);
+    qaIndex.push_back(g_entropy);
     return qaIndex;
 }
 
