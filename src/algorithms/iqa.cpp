@@ -2,18 +2,18 @@
 #include "opencv2/opencv.hpp"
 #include "utils/fileUtil.h"
 
-float iqa::computeScore(const std::string &imagePath) {
+#define METRIC_LENGTH 7
 
-  cv::Mat input = cv::imread(imagePath);
-  cv::Mat output;
-  float areaScore, posScore;
-  float faceScore =
-      facemodel.calculateFaceScore(input, output, areaScore, posScore);
-  float brisqueScore = brisque.computeScore(input);
-  brisqueScore = 1 - brisqueScore / 100;
-  float score = faceScore * 2 + brisqueScore;
-  if (brisqueScore < 0.3) {
-    score = 0;
+float iqa::computeScore(const std::string &imagePath) {
+  std::vector<float> scores;
+  getAllScore(imagePath, scores);
+  float counted_metrics[METRIC_LENGTH] = {scores[1], scores[2], scores[3],
+                                          scores[5], scores[6], scores[7],
+                                          scores[8]};
+  float score = 0;
+
+  for (int i = 0; i < METRIC_LENGTH; ++i) {
+    score += w[i] * counted_metrics[i];
   }
   return score;
 }
@@ -24,25 +24,23 @@ int iqa::getBestImages(std::string imageDir, float &bestScore,
   if (fileNames.size() == 0) {
     return 1;
   }
-  bestImagePath = (fs::path(imageDir) / fs::path(fileNames[0])).c_str();
-  bestImageName = fileNames[0];
-  bestScore = 0;
+  std::vector<float> imgScores(fileNames.size());
   for (size_t j = 0; j < fileNames.size(); ++j) {
     std::string oriImgPath =
         (fs::path(imageDir) / fs::path(fileNames[j])).c_str();
-    std::vector<float> metrics;
-    // float score = computeScore(oriImgPath);
-    float score = getAllScore(oriImgPath, metrics);
-    std::string metric_str = "";
-    for (auto v : metrics) {
-      metric_str += std::to_string(v) + ",";
-    }
-    std::cout << "img: " << fileNames[j] << ". score: " << metric_str
-              << std::endl;
+    imgScores[j] = computeScore(oriImgPath);
+    std::cout << oriImgPath << ":" << imgScores[j]  << std::endl;
+  }
+
+  bestImagePath = (fs::path(imageDir) / fs::path(fileNames[0])).c_str();
+  bestImageName = fileNames[0];
+  bestScore = 0;
+  for (size_t i = 0; i < fileNames.size(); ++i) {
+    float score = imgScores[i];
     if (score > bestScore) {
       bestScore = score;
-      bestImagePath = oriImgPath;
-      bestImageName = fileNames[j];
+      bestImagePath = (fs::path(imageDir) / fs::path(fileNames[i])).c_str();
+      bestImageName = fileNames[i];
     }
   }
   return 0;

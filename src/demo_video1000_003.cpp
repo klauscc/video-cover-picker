@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     std::string bestImageName, bestImagePath;
     int res = iqa.getBestImages(videoPath, score, bestImageName, bestImagePath);
     if (res == 0) {
-      bestImageName = "002_" + std::to_string(score) + "_" + bestImageName;
+      bestImageName = "003_" + std::to_string(score) + "_" + bestImageName;
       std::string bestImageSavePath =
           (fs::path(qaImgDir) / fs::path(videoNames[i]) /
            fs::path(bestImageName))
