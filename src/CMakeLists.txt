@@ -2,10 +2,7 @@ cmake_minimum_required (VERSION 3.1)
 project (iqa)
 
 set (CMAKE_CXX_STANDARD 11)
-#set(Boost_USE_STATIC_LIBS OFF)
-#set(Boost_USE_MULTITHREADED OFF)
-
-#set(Boost_USE_STATIC_RUNTIME OFF)
+#set(Boost_USE_STATIC_LIBS OFF) #set(Boost_USE_MULTITHREADED OFF) #set(Boost_USE_STATIC_RUNTIME OFF)
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 find_package(OpenCV REQUIRED)
@@ -33,5 +30,5 @@ target_link_libraries(demo_face iqa_algorithm)
 add_executable(demo_singleColor demo_singleColorImage.cpp)
 target_link_libraries(demo_singleColor iqa_algorithm ${Boost_LIBRARIES})
 
-add_executable(demo_sample demo_samples.cpp)
-target_link_libraries(demo_sample iqa_algorithm ${Boost_LIBRARIES})
+add_executable(demo_video1000 demo_video1000.cpp)
+target_link_libraries(demo_video1000 iqa_algorithm ${Boost_LIBRARIES})

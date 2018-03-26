@@ -7,8 +7,8 @@ namespace fs = boost::filesystem;
 
 int main(int argc, char *argv[]) {
   iqa iqa;
-  std::string oriImageDir = "../dataset/samples/samples/";
-  std::string qaImgDir = "../dataset/samples/samples_res/";
+  std::string oriImageDir = "../dataset/video1000/samples/";
+  std::string qaImgDir = "../dataset/video1000/samples_res/";
   std::vector<std::string> videoNames;
   getDirectoriesInDir(oriImageDir, videoNames);
   for (size_t i = 0; i < videoNames.size(); ++i) {
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     std::string bestImageName, bestImagePath;
     int res = iqa.getBestImages(videoPath, score, bestImageName, bestImagePath);
     if (res == 0) {
-      bestImageName = "klaus_" + std::to_string(score) + "_" + bestImageName;
+      bestImageName = "002_" + std::to_string(score) + "_" + bestImageName;
       std::string bestImageSavePath =
           (fs::path(qaImgDir) / fs::path(videoNames[i]) /
            fs::path(bestImageName))
