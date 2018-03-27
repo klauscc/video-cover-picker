@@ -19,9 +19,9 @@ int main(int argc, char *argv[]) {
     std::vector<std::string> saveFileName;
     if (fs::exists(fs::path(videoSavePath))) {
       getFileNamesInDir(videoSavePath, saveFileName);
-      if (saveFileName.size() == 2) {
-        continue;
-      }
+      //if (saveFileName.size() == 2) {
+        //continue;
+      //}
     } else {
       fs::create_directory(fs::path(videoSavePath));
     }
