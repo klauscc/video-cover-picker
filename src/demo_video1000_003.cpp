@@ -27,14 +27,17 @@ int main(int argc, char *argv[]) {
     }
     float score;
     std::string bestImageName, bestImagePath;
+    long t1 = cv::getTickCount(); 
     int res = iqa.getBestImages(videoPath, score, bestImageName, bestImagePath);
+    long t2 = cv::getTickCount(); 
+    double t = (t2-t1) / cv::getTickFrequency();  
     if (res == 0) {
       bestImageName = "003_" + std::to_string(score) + "_" + bestImageName;
       std::string bestImageSavePath =
           (fs::path(qaImgDir) / fs::path(videoNames[i]) /
            fs::path(bestImageName))
               .c_str();
-      std::cout << "video:" << videoPath << ". bestImage:" << bestImageName
+      std::cout << "video:" << videoPath << ". bestImage:" << bestImageName << ". takes " << t << "s"
                 << std::endl;
       fs::copy_file(bestImagePath, bestImageSavePath,
                     fs::copy_option::overwrite_if_exists);
