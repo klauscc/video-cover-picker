@@ -1,3 +1,14 @@
+/*================================================================
+*   God Bless You. 
+*   
+*   file name: iqa.cpp
+*   author: klaus
+*   email: klaus.cheng@qq.com
+*   created date: 2018/03/26
+*   description: implemention of iqa
+*
+================================================================*/
+
 #include "iqa.h"
 #include "opencv2/opencv.hpp"
 #include "utils/fileUtil.h"
@@ -22,7 +33,7 @@ float iqa::computeScore(const std::string &imagePath, int thread_idx) {
   }
   return score;
 }
-int iqa::getBestImages(std::string imageDir, float &bestScore,
+int iqa::getBestImage(std::string imageDir, float &bestScore,
                        std::string &bestImageName, std::string &bestImagePath) {
   std::vector<std::string> fileNames;
   getFileNamesInDir(imageDir, fileNames);

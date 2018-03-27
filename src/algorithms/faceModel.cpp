@@ -1,3 +1,14 @@
+/*================================================================
+*   God Bless You. 
+*   
+*   file name: faceModel.cpp
+*   author: klaus
+*   email: klaus.cheng@qq.com
+*   created date: 2018/03/26
+*   description: implemention
+*
+================================================================*/
+
 #include "faceModel.h"
 #include <algorithm>
 

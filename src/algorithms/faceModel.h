@@ -1,8 +1,13 @@
-/*! \class faceModel
- *  \brief Brief class description
- *
- *  Detailed description
- */
+/*================================================================
+*   God Bless You.
+*
+*   file name: faceModel.h
+*   author: klaus
+*   email: klaus.cheng@qq.com
+*   created date: 2018/03/26
+*   description: compute score using face model, i.e. the face position and face area.
+*
+================================================================*/
 
 #ifndef FACE_MODEL_H
 #define FACE_MODEL_H

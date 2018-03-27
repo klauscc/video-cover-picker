@@ -3,16 +3,10 @@ project (iqa)
 
 set (CMAKE_CXX_STANDARD 11)
 
-#set(Boost_USE_STATIC_LIBS OFF)
-#set(Boost_USE_MULTITHREADED OFF)
-#set(Boost_USE_STATIC_RUNTIME OFF)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-
 find_package(OpenCV REQUIRED)
 find_package(Boost REQUIRED filesystem)
 
 find_package(OpenMP)
-
 if (OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
@@ -29,23 +23,5 @@ include_directories(${OpenCV_INCLUDE_DIRS}
 
 add_subdirectory(algorithms)
 
-#add_executable(demo_bak demo_bak20180301.cpp )
-#target_link_libraries(demo_bak iqa_algorithm)
- 
-add_executable(demo demo.cpp )
-target_link_libraries(demo iqa_algorithm)
-
-add_executable(demo_face demo_faceModel.cpp )
-target_link_libraries(demo_face iqa_algorithm)
-
-add_executable(demo_singleColor demo_singleColorImage.cpp)
-target_link_libraries(demo_singleColor iqa_algorithm ${Boost_LIBRARIES})
-
-add_executable(demo_video1000_002 demo_video1000_002.cpp)
-target_link_libraries(demo_video1000_002 iqa_algorithm ${Boost_LIBRARIES})
-
 add_executable(demo_video1000_003 demo_video1000_003.cpp)
 target_link_libraries(demo_video1000_003 iqa_algorithm ${Boost_LIBRARIES})
-
-add_executable(exportScores exportScores.cpp)
-target_link_libraries(exportScores iqa_algorithm ${Boost_LIBRARIES})

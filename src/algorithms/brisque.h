@@ -1,4 +1,16 @@
+/*================================================================
+*   God Bless You.
+*
+*   file name: brisque.h
+*   author: klaus
+*   email: klaus.cheng@qq.com
+*   created date: 2018/03/26
+*   description:
+*
+================================================================*/
+
 #ifndef IQA_BRESQUE
+#pragma once
 #define IQA_BRESQUE
 
 #include "brisque/brisque.h"
@@ -14,7 +26,7 @@ public:
   virtual ~Brisque();
 
   int readRangeFile(std::string rangeFilePath = "../model/brisque/allrange");
-  int loadSvmModel(std::string modelFilePath = "../model/brisque/allmodel"); 
+  int loadSvmModel(std::string modelFilePath = "../model/brisque/allmodel");
 
 private:
   /* data */
