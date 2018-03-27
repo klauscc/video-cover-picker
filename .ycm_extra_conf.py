@@ -82,7 +82,9 @@ get_python_inc(),
 '-I',
 './src/third_party/dlib',
 '-I',
-'./src/third_party/'
+'./src/third_party/',
+'-I',
+'/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.151-5.b12.el7_4.x86_64/include'
 ]
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,

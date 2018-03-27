@@ -10,6 +10,7 @@ if (OPENMP_FOUND)
 endif()
 
 add_library(iqa_algorithm STATIC 
+    iqa_pool.cpp
     iqa.cpp
     ittivsmodel.cpp 
     nriqa.cpp 

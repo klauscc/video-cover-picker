@@ -19,7 +19,7 @@
 #include "nriqa.h"
 #include <iostream>
 
-#define MAX_POOL_SIZE 20
+#define MAX_POOL_SIZE 12
 
 class iqa {
 public:

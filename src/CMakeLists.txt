@@ -4,7 +4,7 @@ project (iqa)
 set (CMAKE_CXX_STANDARD 11)
 
 find_package(OpenCV REQUIRED)
-find_package(Boost REQUIRED filesystem)
+find_package(Boost REQUIRED filesystem thread)
 
 find_package(OpenMP)
 if (OPENMP_FOUND)
@@ -25,3 +25,6 @@ add_subdirectory(algorithms)
 
 add_executable(demo_video1000_003 demo_video1000_003.cpp)
 target_link_libraries(demo_video1000_003 iqa_algorithm ${Boost_LIBRARIES})
+
+add_executable(demo_iqaPool demo_iqaPool.cpp)
+target_link_libraries(demo_iqaPool iqa_algorithm ${Boost_LIBRARIES})

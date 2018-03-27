@@ -1,6 +1,6 @@
 /*================================================================
-*   God Bless You. 
-*   
+*   God Bless You.
+*
 *   file name: iqa.cpp
 *   author: klaus
 *   email: klaus.cheng@qq.com
@@ -34,7 +34,7 @@ float iqa::computeScore(const std::string &imagePath, int thread_idx) {
   return score;
 }
 int iqa::getBestImage(std::string imageDir, float &bestScore,
-                       std::string &bestImageName, std::string &bestImagePath) {
+                      std::string &bestImageName, std::string &bestImagePath) {
   std::vector<std::string> fileNames;
   getFileNamesInDir(imageDir, fileNames);
   if (fileNames.size() == 0) {
@@ -47,7 +47,6 @@ int iqa::getBestImage(std::string imageDir, float &bestScore,
     std::string oriImgPath =
         (fs::path(imageDir) / fs::path(fileNames[j])).c_str();
     imgScores[j] = computeScore(oriImgPath, j);
-    std::cout << oriImgPath << ":" << imgScores[j] << std::endl;
   }
 
   bestImagePath = (fs::path(imageDir) / fs::path(fileNames[0])).c_str();
@@ -68,7 +67,7 @@ iqa::iqa(std::string allRangeFile, std::string allModel) {
   brisqueVec.resize(MAX_POOL_SIZE);
   ittiVec.resize(MAX_POOL_SIZE);
   nriqaVec.resize(MAX_POOL_SIZE);
-  faceModelVec.resize(MAX_POOL_SIZE); 
+  faceModelVec.resize(MAX_POOL_SIZE);
   for (int i = 0; i < MAX_POOL_SIZE; ++i) {
     brisqueVec[i].readRangeFile(allRangeFile);
     brisqueVec[i].loadSvmModel(allModel);
@@ -87,9 +86,20 @@ float iqa::getAllScore(const std::string imagePath, std::vector<float> &scores,
   // calculate klausScore, areaScore, posScore, brisqueScore
   cv::Mat output;
   float areaScore, posScore;
-  float faceScore = faceModelVec[thread_idx].calculateFaceScore(
-      input, output, areaScore, posScore);
-  float brisqueScore = brisqueVec[thread_idx].computeScore(input);
+  float faceScore, brisqueScore;
+  if (thread_idx >= MAX_POOL_SIZE) {
+    std::cout << "warning... thread_idx " << thread_idx << "max than"
+              << MAX_POOL_SIZE << std::endl;
+    faceModel facemodel = faceModelVec[0];
+    Brisque brisque = brisqueVec[0];
+    faceScore =
+        facemodel.calculateFaceScore(input, output, areaScore, posScore);
+    brisqueScore = brisque.computeScore(input);
+    brisqueScore = 1 - brisqueScore / 100;
+  }
+  faceScore = faceModelVec[thread_idx].calculateFaceScore(input, output,
+                                                          areaScore, posScore);
+  brisqueScore = brisqueVec[thread_idx].computeScore(input);
   brisqueScore = 1 - brisqueScore / 100;
   float score = faceScore * 2 + brisqueScore;
   if (brisqueScore < 0.3) {
