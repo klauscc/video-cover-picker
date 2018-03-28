@@ -12,8 +12,11 @@
 #include "iqa.h"
 #include "opencv2/opencv.hpp"
 #include "utils/fileUtil.h"
+#include <boost/filesystem.hpp>
 
 #include <omp.h>
+
+namespace fs = boost::filesystem;
 
 #define METRIC_LENGTH 7
 
@@ -63,14 +66,20 @@ int iqa::getBestImage(std::string imageDir, float &bestScore,
   return 0;
 }
 
-iqa::iqa(std::string allRangeFile, std::string allModel) {
-  brisqueVec.resize(MAX_POOL_SIZE);
-  ittiVec.resize(MAX_POOL_SIZE);
-  nriqaVec.resize(MAX_POOL_SIZE);
-  faceModelVec.resize(MAX_POOL_SIZE);
-  for (int i = 0; i < MAX_POOL_SIZE; ++i) {
+
+iqa::iqa(std::string modelDir) {
+  std::string allRangeFile =
+      (fs::path(modelDir) / fs::path("./model/brisque/allrange")).c_str();
+  std::string allModelFile =
+      (fs::path(modelDir) / fs::path("./model/brisque/allmodel")).c_str();
+  brisqueVec.resize(MAX_IMAGE_NUM);
+  ittiVec.resize(MAX_IMAGE_NUM);
+  nriqaVec.resize(MAX_IMAGE_NUM);
+  faceModelVec.resize(MAX_IMAGE_NUM);
+
+  for (int i = 0; i < MAX_IMAGE_NUM; ++i) {
     brisqueVec[i].readRangeFile(allRangeFile);
-    brisqueVec[i].loadSvmModel(allModel);
+    brisqueVec[i].loadSvmModel(allModelFile);
     ittiVec[i].IttiVSModelInit();
     nriqaVec[i].nriqaInit();
   }
@@ -87,9 +96,9 @@ float iqa::getAllScore(const std::string imagePath, std::vector<float> &scores,
   cv::Mat output;
   float areaScore, posScore;
   float faceScore, brisqueScore;
-  if (thread_idx >= MAX_POOL_SIZE) {
+  if (thread_idx >= MAX_IMAGE_NUM) {
     std::cout << "warning... thread_idx " << thread_idx << "max than"
-              << MAX_POOL_SIZE << std::endl;
+              << MAX_IMAGE_NUM << std::endl;
     faceModel facemodel = faceModelVec[0];
     Brisque brisque = brisqueVec[0];
     faceScore =

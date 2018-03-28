@@ -19,12 +19,11 @@
 #include "nriqa.h"
 #include <iostream>
 
-#define MAX_POOL_SIZE 12
+#define MAX_IMAGE_NUM 12
 
 class iqa {
 public:
-  iqa(std::string allRangeFile = "../model/brisque/allrange",
-      std::string allModel = "../model/brisque/allmodel");
+  iqa(std::string modelDir = "/usr/local/iqa"); 
   float computeScore(const std::string &imagePath, int thread_idx = 0);
   float getAllScore(const std::string imagePath, std::vector<float> &scores,
                     int thread_idx = 0);

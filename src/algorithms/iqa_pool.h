@@ -24,5 +24,14 @@
 *
 * @return: int
 */
-int getBestImage(std::string imageDir, float &bestScore,
+int getBestImage(const std::string &imageDir, float &bestScore,
                  std::string &bestImageName, std::string &bestImagePath);
+
+/**
+* @brief: init iqa 
+*
+* @param: std::string modelDir. 
+*
+* @return: void  
+*/
+void   initIqa(std::string modelDir);

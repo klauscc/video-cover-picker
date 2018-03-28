@@ -16,8 +16,8 @@
 #include <string>
 #include <thread>
 
-static const int POOL_SIZE = max(get_nprocs() / MAX_POOL_SIZE, 1);
-static std::vector<iqa> iqaVec(POOL_SIZE);
+static const int POOL_SIZE = max(get_nprocs() / MAX_IMAGE_NUM, 1);
+static std::vector<iqa> iqaVec(POOL_SIZE) ;
 static std::vector<bool> iqaFree(POOL_SIZE, true);
 static std::mutex iqaGetterMu;
 static std::condition_variable iqaGetterCv;
@@ -27,7 +27,15 @@ static int newFreeIqaId = -1;
 extern int getIqa();
 extern void freeIqa(int iqaId);
 
-int getBestImage(std::string imageDir, float &bestScore,
+void initIqa(std::string modelDir) {
+  iqaVec.reserve(POOL_SIZE);
+  for (int i = 0; i < POOL_SIZE; ++i) {
+    iqa iqa_(modelDir);
+    iqaVec.push_back(iqa_);
+  }
+}
+
+int getBestImage(const std::string &imageDir, float &bestScore,
                  std::string &bestImageName, std::string &bestImagePath) {
   int iqaId = getIqa();
   int res = iqaVec[iqaId].getBestImage(imageDir, bestScore, bestImageName,

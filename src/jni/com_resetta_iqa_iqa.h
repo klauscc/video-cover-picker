@@ -12,8 +12,16 @@ extern "C" {
  * Method:    detectBestImageIndir
  * Signature: (Ljava/lang/String;)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_resetta_iqa_iqa_detectBestImageIndir
-  (JNIEnv *, jobject, jstring);
+JNIEXPORT jstring JNICALL
+Java_com_resetta_iqa_Iqa_detectBestImageIndir(JNIEnv *, jobject, jstring);
+
+/*
+ * Class:     com_resetta_iqa_iqa
+ * Method:    initIqa
+ * Signature: (Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_resetta_iqa_Iqa_initIqa(JNIEnv *, jobject,
+                                                        jstring);
 
 #ifdef __cplusplus
 }
